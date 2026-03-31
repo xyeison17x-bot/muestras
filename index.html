@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generador de Muestras</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <script src="./vendor/xlsx.full.min.js"></script>
+  <script src="./vendor/jspdf.umd.min.js"></script>
+  <script src="./vendor/jspdf.plugin.autotable.min.js"></script>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="license-gate" id="licenseGate">
+    <div class="license-card">
+      <img src="logo.png" alt="Logo RSM" class="license-logo" />
+      <p class="license-eyebrow">RSM Colombia | Acceso controlado</p>
+      <h2>Activaci&oacute;n requerida</h2>
+      <p class="license-copy">
+        Esta herramienta requiere una licencia local v&aacute;lida para habilitar su uso.
+        Carga el archivo de licencia autorizado para continuar.
+      </p>
+
+      <div class="license-form">
+        <label for="licenseFileInput">Archivo de licencia</label>
+        <input id="licenseFileInput" type="file" accept=".json" />
+        <button class="primary" id="activateLicenseBtn" type="button">Activar aplicaci&oacute;n</button>
+      </div>
+
+      <div class="message" id="licenseMessage"></div>
+      <div class="license-details" id="licenseDetails" style="display:none;"></div>
+    </div>
+  </div>
+
+  <div class="container" id="appShell" style="display:none;">
+    <section class="hero">
+      <div class="hero-lines" aria-hidden="true">
+        <span class="hero-line hero-line-gray"></span>
+        <span class="hero-line hero-line-green"></span>
+        <span class="hero-line hero-line-blue"></span>
+      </div>
+      <div class="brand-header">
+        <div class="brand-lockup">
+          <img src="logo.png" alt="Logo RSM" class="brand-logo" />
+          <div class="brand-copy">
+            <p class="eyebrow">RSM Colombia | Herramienta Interna</p>
+            <h1>Generador de Muestras</h1>
+          </div>
+        </div>
+        <div class="hero-badge">Muestreo documental</div>
+      </div>
+    </section>
+
+    <div class="card license-status-card" id="licenseStatusCard" style="display:none;">
+      <div class="license-status" id="licenseStatus"></div>
+    </div>
+
+    <div class="card">
+      <p class="subtitle intro-text">
+        Carga tu archivo, configura la muestra y exporta el resultado en Excel o PDF.
+      </p>
+
+      <div class="grid">
+        <div>
+          <label for="fileInput">Archivo</label>
+          <input id="fileInput" type="file" accept=".csv,.xlsx,.xls" />
+        </div>
+        <div>
+          <label for="sampleCount">Cantidad de muestras</label>
+          <input id="sampleCount" type="number" min="1" placeholder="Ej. 10" />
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top: 16px;">
+        <div id="sheetSelectorWrap" style="display:none;">
+          <label for="sheetSelect">Hoja de Excel</label>
+          <select id="sheetSelect">
+            <option value="">Selecciona una hoja</option>
+          </select>
+        </div>
+        <div></div>
+      </div>
+
+      <div class="grid" style="margin-top: 16px;">
+        <div>
+          <label for="auditorInput">Auditor responsable</label>
+          <input id="auditorInput" type="text" placeholder="Ej. Ana Pérez" />
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top: 16px;">
+        <div>
+          <div class="field-header">
+            <label class="checkbox-label" for="useSeedCheckbox">
+              <input id="useSeedCheckbox" type="checkbox" />
+              <span>Usar semilla</span>
+            </label>
+              <span class="tooltip-wrap">
+                <button
+                  type="button"
+                  class="help-badge"
+                  aria-label="Explicación de la semilla de muestreo"
+                >i</button>
+                <span class="tooltip-text">
+                  Act&iacute;vala solo si quieres poder repetir exactamente la misma muestra m&aacute;s adelante. Si vuelves a usar el mismo archivo, la misma cantidad y el mismo valor, obtendr&aacute;s los mismos registros. Si no la activas, la muestra cambiar&aacute; cada vez.
+                </span>
+              </span>
+            </div>
+          <input id="seedInput" type="number" placeholder="Ej. 12345" disabled style="display:none;" />
+        </div>
+      </div>
+
+      <div style="margin-top: 16px;">
+        <button class="primary" id="generateBtn">Generar muestra</button>
+        <button class="secondary" id="downloadExcelBtn" disabled>Descargar Excel</button>
+        <button class="secondary" id="downloadPdfBtn" disabled>Descargar PDF</button>
+        <button class="danger" id="resetBtn">Reiniciar</button>
+      </div>
+
+      <div class="info" id="fileInfo"></div>
+      <div class="message" id="message"></div>
+    </div>
+
+    <div class="card" id="resultCard" style="display:none;">
+      <h2 style="margin-top:0;">Resultado</h2>
+      <div class="report-meta" id="reportMeta"></div>
+      <div class="table-wrap">
+        <table id="resultTable"></table>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 RSM Colombia. Herramienta interna para generaci&oacute;n de muestras. Desarrollado por Yeison Castro.</p>
+    </footer>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

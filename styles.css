@@ -1,0 +1,636 @@
+/* Variables globales de color para mantener una apariencia consistente. */
+:root {
+  --bg: #cfd3d6;
+  --panel: rgba(255, 255, 255, 0.92);
+  --soft: #eef1f3;
+  --text: #1f2937;
+  --muted: #5f6770;
+
+  /* Colores inspirados en RSM */
+  --accent: #2ca01c;
+  --accent-2: #238016;
+  --brand-blue: #009cde;
+  --brand-gray: #666a70;
+
+  --danger: #ef4444;
+  --border: #b8bec5;
+}
+
+/* Hace que padding y border cuenten dentro del ancho/alto total. */
+* { box-sizing: border-box; }
+
+/* Estilos generales de la pagina. */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(180deg, #f8fafc, #e5e7eb 50%, #cbd5e1);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Contenedor principal que centra y limita el ancho del contenido. */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Pantalla inicial que bloquea la app hasta validar una licencia. */
+.license-gate {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* Tarjeta principal de activacion. */
+.license-card {
+  width: min(100%, 560px);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(0, 156, 222, 0.16);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 22px 48px rgba(15, 23, 42, 0.12);
+}
+
+/* Logo superior de la pantalla de licencia. */
+.license-logo {
+  height: 60px;
+  width: auto;
+  display: block;
+  margin-bottom: 18px;
+}
+
+/* Linea institucional de la activacion. */
+.license-eyebrow {
+  margin: 0 0 8px;
+  color: var(--brand-gray);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Titulo de la pantalla de activacion. */
+.license-card h2 {
+  margin: 0 0 10px;
+  color: #17304d;
+  font-size: 2rem;
+  line-height: 1.08;
+}
+
+/* Texto descriptivo de la activacion. */
+.license-copy {
+  margin: 0 0 20px;
+  color: #586779;
+  line-height: 1.6;
+}
+
+/* Bloque de carga de licencia. */
+.license-form {
+  display: grid;
+  gap: 12px;
+}
+
+/* Contenedor visual de datos de licencia. */
+.license-details,
+.license-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Enlace visual para accesos administrativos relacionados con la licencia. */
+.admin-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid rgba(0, 156, 222, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #0f4c6d;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+/* Estado hover del acceso administrativo. */
+.admin-link:hover {
+  background: rgba(0, 156, 222, 0.08);
+  transform: translateY(-1px);
+}
+
+/* Variante compacta del enlace administrativo como icono discreto. */
+.admin-link-icon {
+  min-width: 40px;
+  width: 40px;
+  padding: 0;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+/* Tarjeta de estado de licencia dentro de la app. */
+.license-status-card {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+/* Bloque superior con identidad de marca y contexto. */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(243, 247, 250, 0.96));
+  border: 1px solid rgba(0, 156, 222, 0.18);
+  border-radius: 24px;
+  padding: 28px 28px 24px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  margin-bottom: 24px;
+}
+
+/* Grupo de lineas decorativas superiores con estilo corporativo. */
+.hero-lines {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  margin-bottom: 22px;
+}
+
+/* Base compartida para las tres lineas. */
+.hero-line {
+  display: block;
+  height: 3px;
+  border-radius: 999px;
+}
+
+/* Linea gris corta. */
+.hero-line-gray {
+  width: 80px;
+  background: #9aa0a6;
+}
+
+/* Linea verde intermedia. */
+.hero-line-green {
+  width: 360px;
+  max-width: 36%;
+  background: var(--accent);
+}
+
+/* Linea azul larga. */
+.hero-line-blue {
+  flex: 1;
+  background: var(--brand-blue);
+}
+
+/* Cabecera con logo, textos y distintivo. */
+.brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Agrupa logo y contenido textual. */
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-width: 0;
+}
+
+/* Tamano y ajuste del logo. */
+.brand-logo {
+  height: 78px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.06));
+}
+
+/* Columna de textos de la marca. */
+.brand-copy {
+  min-width: 0;
+}
+
+/* Linea institucional superior. */
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--brand-gray);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Titulo principal de la aplicacion. */
+h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3.2vw, 2.35rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #17304d;
+}
+
+/* Texto descriptivo debajo del encabezado. */
+.subtitle {
+  max-width: 700px;
+  color: #536273;
+  margin: 12px 0 0;
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+/* Variante del texto introductorio cuando va dentro de la tarjeta principal. */
+.intro-text {
+  max-width: none;
+  margin: 0 0 20px;
+  font-size: 0.98rem;
+  color: #5f6f80;
+}
+
+/* Distintivo lateral del encabezado. */
+.hero-badge {
+  flex-shrink: 0;
+  padding: 10px 16px;
+  border: 1px solid rgba(0, 156, 222, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  color: #0f4c6d;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Tarjeta visual usada para agrupar secciones. */
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  margin-bottom: 18px;
+}
+
+/* Grilla adaptable para distribuir campos en columnas. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+/* Estilo base para etiquetas de formulario. */
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--text);
+}
+
+/* Fila superior para etiquetas con ayuda contextual. */
+.field-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+/* Estilo del check de semilla. */
+.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+/* Ajusta el tamano del check. */
+.checkbox-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--brand-blue);
+}
+
+/* Boton pequeno de ayuda con signo de interrogacion. */
+.help-badge {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 156, 222, 0.25);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--brand-blue);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0;
+  margin: 0;
+}
+
+/* Estado hover del icono de ayuda. */
+.help-badge:hover {
+  transform: none;
+  background: rgba(0, 156, 222, 0.08);
+}
+
+/* Contenedor del tooltip de ayuda. */
+.tooltip-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Tooltip visual de ayuda. */
+.tooltip-text {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  width: 260px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #17304d;
+  color: #f8fafc;
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.45;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.18);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Flecha inferior del tooltip. */
+.tooltip-text::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 100%;
+  border-width: 6px;
+  border-style: solid;
+  border-color: #17304d transparent transparent transparent;
+}
+
+/* Muestra el tooltip al pasar el cursor o enfocar el icono. */
+.tooltip-wrap:hover .tooltip-text,
+.tooltip-wrap:focus-within .tooltip-text {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Apariencia compartida de inputs y selectores. */
+input[type="file"],
+input[type="number"],
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--soft);
+  color: #1f2937;
+}
+
+/* Ajusta el control de archivo para que tenga la misma altura visual que los demas campos. */
+input[type="file"] {
+  padding: 8px 12px;
+  line-height: 1.2;
+}
+
+/* Altura comoda para cuadros de texto amplios. */
+textarea {
+  min-height: 220px;
+  resize: vertical;
+  font-family: Consolas, "Courier New", monospace;
+  line-height: 1.5;
+}
+
+/* Boton interno del input file con altura consistente. */
+input[type="file"]::-webkit-file-upload-button {
+  height: 34px;
+  padding: 0 14px;
+  margin-right: 12px;
+}
+
+/* Boton interno del input file para navegadores modernos. */
+input[type="file"]::file-selector-button {
+  height: 34px;
+  padding: 0 14px;
+  margin-right: 12px;
+}
+
+/* Estilo base para todos los botones. */
+button {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.15s ease, opacity 0.15s ease, background 0.15s ease;
+  margin-right: 8px;
+  margin-top: 8px;
+}
+
+/* Efecto visual ligero al pasar el cursor. */
+button:hover { transform: translateY(-1px); }
+
+/* Estado visual para botones deshabilitados. */
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Boton principal para la accion mas importante. */
+.primary {
+  background: var(--brand-blue);
+  color: white;
+}
+
+/* Hover del boton principal. */
+.primary:hover {
+  background: #0373a3;
+}
+
+/* Boton secundario para acciones de descarga. */
+.secondary {
+  background: #e2e8f0;
+  color: #111827;
+}
+
+/* Boton de reinicio o accion destructiva. */
+.danger {
+  background: var(--danger);
+  color: white;
+}
+
+/* Contenedor de informacion resumida del archivo cargado. */
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+  color: var(--muted);
+}
+
+/* Etiquetas redondeadas para mostrar metadatos. */
+.pill {
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+/* Caja de mensajes para exito o error. */
+.message {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  color: var(--text);
+  display: none;
+}
+
+/* Cuando el mensaje debe verse, se cambia a display block. */
+.message.show { display: block; }
+
+/* Contenedor scrollable para tablas anchas. */
+.table-wrap {
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-top: 14px;
+  background: white;
+}
+
+/* Tabla de resultados. */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  color: #111827;
+  min-width: 700px;
+}
+
+/* Celdas y encabezados de la tabla. */
+th, td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  vertical-align: top;
+  font-size: 0.95rem;
+}
+
+/* Encabezado fijo mientras la tabla hace scroll. */
+th {
+  background: #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Texto auxiliar debajo del titulo de resultados. */
+.report-meta {
+  color: var(--muted);
+  margin-top: 10px;
+}
+
+/* Texto auxiliar corto para formularios internos. */
+.small-note {
+  margin: 0;
+  color: #607284;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Separacion consistente para grupos de botones. */
+.stack-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* Salida con fuente monoespaciada para licencias o datos tecnicos. */
+.output-box {
+  font-family: Consolas, "Courier New", monospace;
+  word-break: break-word;
+}
+
+/* Color destacado opcional para titulos. */
+.title-accent {
+  color: var(--brand-blue);
+}
+
+/* Pie de pagina institucional. */
+.site-footer {
+  margin-top: 18px;
+  padding: 4px 4px 12px;
+  text-align: center;
+}
+
+/* Texto de copyright. */
+.site-footer p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+/* Ajustes visuales para pantallas pequenas. */
+@media (max-width: 640px) {
+  .license-card {
+    padding: 22px 18px;
+    border-radius: 20px;
+  }
+
+  .license-card h2 {
+    font-size: 1.7rem;
+  }
+
+  .hero {
+    padding: 20px 18px;
+  }
+
+  .hero-lines {
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .hero-line-gray {
+    width: 54px;
+  }
+
+  .hero-line-green {
+    width: 110px;
+    max-width: 32%;
+  }
+
+  .brand-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .brand-lockup {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .brand-logo {
+    height: 58px;
+  }
+
+  h1 {
+    font-size: 1.85rem;
+  }
+}

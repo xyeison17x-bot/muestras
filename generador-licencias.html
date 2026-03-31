@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generador de Licencias RSM</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="license-gate" id="adminGate">
+    <div class="license-card">
+      <img src="logo.png" alt="Logo RSM" class="license-logo" />
+      <p class="license-eyebrow">RSM Colombia | Acceso administrativo</p>
+      <h2>Clave requerida</h2>
+      <p class="license-copy">
+        El generador de licencias est&aacute; restringido. Ingresa la clave de administrador para habilitar este m&oacute;dulo.
+      </p>
+
+      <div class="license-form">
+        <label for="adminUsernameInput">Usuario administrador</label>
+        <input id="adminUsernameInput" type="text" placeholder="Ej. admin" value="admin" />
+        <label for="adminPasswordInput">Clave de administrador</label>
+        <input id="adminPasswordInput" type="password" placeholder="Ingresa la clave" />
+        <button class="primary" id="unlockGeneratorBtn" type="button">Ingresar</button>
+      </div>
+
+      <div class="message" id="adminAccessMessage"></div>
+    </div>
+  </div>
+
+  <div class="container" id="generatorShell" style="display:none;">
+    <section class="hero">
+      <div class="hero-lines" aria-hidden="true">
+        <span class="hero-line hero-line-gray"></span>
+        <span class="hero-line hero-line-green"></span>
+        <span class="hero-line hero-line-blue"></span>
+      </div>
+      <div class="brand-header">
+        <div class="brand-lockup">
+          <img src="logo.png" alt="Logo RSM" class="brand-logo" />
+          <div class="brand-copy">
+            <p class="eyebrow">RSM Colombia | Administraci&oacute;n interna</p>
+            <h1>Generador de Licencias</h1>
+          </div>
+        </div>
+        <div class="hero-badge">Licenciamiento</div>
+      </div>
+    </section>
+
+    <div class="card license-status-card">
+      <div class="license-status">
+        <span class="pill" id="adminSessionBadge">Modo administrador activo</span>
+        <button class="secondary" id="logoutGeneratorBtn" type="button">Cerrar sesi&oacute;n</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="subtitle intro-text">
+        Genera archivos de licencia v&aacute;lidos para la herramienta de muestreo. Este m&oacute;dulo debe ser usado solo por personal autorizado.
+      </p>
+
+      <div class="grid">
+        <div>
+          <label for="companyInput">Empresa</label>
+          <input id="companyInput" type="text" placeholder="Ej. RSM Colombia" />
+        </div>
+        <div>
+          <label for="issuedToInput">Titular</label>
+          <input id="issuedToInput" type="text" placeholder="Ej. Yeison Castro" />
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top: 16px;">
+        <div>
+          <label for="expiresAtInput">Fecha de vencimiento</label>
+          <input id="expiresAtInput" type="date" />
+        </div>
+        <div>
+          <label for="productInput">Producto</label>
+          <input id="productInput" type="text" value="RSM_MUESTRAS" readonly />
+        </div>
+      </div>
+
+      <div class="stack-actions">
+        <button class="primary" id="generateLicenseBtn" type="button">Generar licencia</button>
+        <button class="secondary" id="downloadLicenseBtn" type="button" disabled>Descargar JSON</button>
+        <button class="secondary" id="copyLicenseBtn" type="button" disabled>Copiar JSON</button>
+      </div>
+
+      <p class="small-note" style="margin-top: 14px;">
+        La clave se calcula autom&aacute;ticamente a partir de la empresa, el titular y la fecha de vencimiento.
+      </p>
+
+      <div class="message" id="licenseGeneratorMessage"></div>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0;">Seguridad</h2>
+      <p class="small-note">
+        Desde aqu&iacute; puedes cambiar la clave del generador. El cambio se guarda localmente en este navegador.
+      </p>
+
+      <div class="grid" style="margin-top: 16px;">
+        <div>
+          <label for="currentAdminPasswordInput">Clave actual</label>
+          <input id="currentAdminPasswordInput" type="password" placeholder="Ingresa la clave actual" />
+        </div>
+        <div>
+          <label for="newAdminPasswordInput">Nueva clave</label>
+          <input id="newAdminPasswordInput" type="password" placeholder="Ingresa la nueva clave" />
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top: 16px;">
+        <div>
+          <label for="confirmAdminPasswordInput">Confirmar nueva clave</label>
+          <input id="confirmAdminPasswordInput" type="password" placeholder="Repite la nueva clave" />
+        </div>
+        <div></div>
+      </div>
+
+      <div class="stack-actions">
+        <button class="primary" id="changeAdminPasswordBtn" type="button">Cambiar clave</button>
+      </div>
+
+      <div class="message" id="adminPasswordChangeMessage"></div>
+    </div>
+
+    <div class="card" id="licenseResultCard" style="display:none;">
+      <h2 style="margin-top:0;">Resultado</h2>
+      <div class="info" id="licenseMeta"></div>
+      <div class="table-wrap" style="padding: 16px; margin-top: 16px;">
+        <div class="output-box" id="licenseKeyPreview" style="font-size: 1rem; font-weight: 700;"></div>
+        <label for="licenseJsonOutput" style="margin-top: 16px;">Contenido JSON</label>
+        <textarea id="licenseJsonOutput" readonly></textarea>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 RSM Colombia. Herramienta interna de licenciamiento. Desarrollado por Yeison Castro.</p>
+    </footer>
+  </div>
+
+  <script src="./license-generator.js"></script>
+</body>
+</html>
